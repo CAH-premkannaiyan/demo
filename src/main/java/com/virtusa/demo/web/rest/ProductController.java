@@ -18,48 +18,51 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProductController {
 
-	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public ResponseEntity list(){
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ResponseEntity<?> list() {
 
 		List<Product> products = new ArrayList<Product>();
-		products.add(new Product(1L,"Java"));
-		products.add(new Product(2L,"Spring"));		
-		
-		
-		return ResponseEntity.ok().body(products);	
-		
-		
+		products.add(new Product(1L, "Java"));
+		products.add(new Product(2L, "Spring"));
+
+		return ResponseEntity.ok().body(products);
+
 	}
-	
-	@RequestMapping(value="/list/mvc", method=RequestMethod.GET)
-	public String listmvc(Model model){
+
+	@RequestMapping(value = "/list/mvc", method = RequestMethod.GET)
+	public String listmvc(Model model) {
 
 		List<Product> products = new ArrayList<Product>();
-		products.add(new Product(1L,"Java"));
-		products.add(new Product(2L,"Spring"));		
-		
-		model.addAttribute("products",products);
-		model.addAttribute("values","productvalue");
-		
-		return "product";	
-		
-		
-	}
-	
-	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String add(Model model){
+		products.add(new Product(1L, "Java"));
+		products.add(new Product(2L, "Spring"));
 
-		model.addAttribute("product",new Product());
-		return "add";	
-		
-		
+		model.addAttribute("products", products);
+		model.addAttribute("values", "productvalue");
+
+		return "product";
+
 	}
-	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String save( @Valid @ModelAttribute("product") Product product, Model model){
-		System.out.println("Id:"+product.getId()+"Name:"+product.getName());
-		return "product";	
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String add(Model model) {
+
+		model.addAttribute("product", new Product());
+		return "add";
+
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(@Valid @ModelAttribute("product") Product product,
+			Model model) {
+		System.out.println("Id:" + product.getId() + "Name:"
+				+ product.getName());
+		return "product";
+	}
+
+	@RequestMapping(value = "/savejson", method = RequestMethod.POST)
+	public ResponseEntity<?> saveJson(@RequestBody Product product) {
+		System.out.println("Id:" + product.getId() + "Name:"
+				+ product.getName());
+		return ResponseEntity.ok().build();
 	}
 }
-
