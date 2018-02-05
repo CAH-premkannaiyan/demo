@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.virtusa.demo.config.DemoBean;
+
 @Controller
 public class ProductController {
 
+	@Autowired
+	private DemoBean demoBean;
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<?> list() {
 
@@ -56,6 +62,7 @@ public class ProductController {
 			Model model) {
 		System.out.println("Id:" + product.getId() + "Name:"
 				+ product.getName());
+		demoBean.doPrint();
 		return "product";
 	}
 

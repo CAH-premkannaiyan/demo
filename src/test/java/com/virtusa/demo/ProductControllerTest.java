@@ -5,7 +5,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -13,6 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.virtusa.demo.web.rest.Product;
 import com.virtusa.demo.web.rest.ProductController;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = DemoApplication.class)
 public class ProductControllerTest {
 
 	private MockMvc mockMvc;
