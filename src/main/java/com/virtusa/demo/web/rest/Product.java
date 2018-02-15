@@ -1,5 +1,7 @@
 package com.virtusa.demo.web.rest;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -11,6 +13,8 @@ public class Product {
 	@NotNull
 	@Length(min = 1, max = 5)
 	private String name;
+	private List<String> features;
+
 
 	public Product() {
 
@@ -38,6 +42,15 @@ public class Product {
 		this.name = name;
 	}
 
+	public List<String> getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(List<String> features) {
+		this.features = features;
+	}
+
+	
 	public void printAll() {
 		System.out.println("id:" + id + ";Name:" + name);
 	}

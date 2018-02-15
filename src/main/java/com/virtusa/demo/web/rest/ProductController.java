@@ -62,8 +62,9 @@ public class ProductController {
 	public String save(@Valid @ModelAttribute("product") Product product,
 			Model model) {
 		System.out.println("Id:" + product.getId() + "Name:"
-				+ product.getName());
+				+ product.getName()+ "features:" + (product.getFeatures()!=null?product.getFeatures().size():null));
 		demoBean.doPrint();
+		model.addAttribute("products", productService.listProducts());
 		return "product";
 	}
 
